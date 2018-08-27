@@ -1,6 +1,9 @@
 package com.spider.choi.wic;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,8 +16,8 @@ import android.widget.Toast;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 
 public class subject extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener{
-    static final String[] LIST_MENU = {"LIST1", "LIST2", "LIST3"};
     ListView dataList;
+    ListViewAdapter adapter;
     SwipeRefreshLayout mSwipeRefreshLayout;
     FloatingActionButton addContentsBtn,searchContentsBtn;
 
@@ -26,18 +29,20 @@ public class subject extends AppCompatActivity implements SwipeRefreshLayout.OnR
         mSwipeRefreshLayout = findViewById(R.id.swipe_layout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, LIST_MENU);
+        adapter = new ListViewAdapter();
         dataList = (ListView)findViewById(R.id.dataList);
         dataList.setAdapter(adapter);
+
+        adapter.addItem(ContextCompat.getDrawable(this, R.drawable.ic_launcher),"android" , "1","2");
 
         dataList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String strText = (String) parent.getItemAtPosition(position) ;
-                Toast.makeText(getApplicationContext(), strText, Toast.LENGTH_SHORT).show();
-
+                ListViewItem item = (ListViewItem)parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), contents.class);
-                intent.putExtra("title", strText);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("listview",item);
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });

@@ -3,16 +3,10 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/navigation_item_wordbook"
-            android:title="erer"/>
+            android:title="HOME"/>
         <item
             android:id="@+id/navigation_item_camera"
-            android:title="erer"/>
-        <item
-            android:id="@+id/navigation_item_write"
-            android:title="erer"/>
-        <item
-            android:id="@+id/navigation_item_settings"
-            android:title="etet" />
-
+            android:title="LOGIN"/>
     </group>
+
 </menu>

@@ -3,6 +3,7 @@ package com.spider.choi.wic;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 public class contents extends AppCompatActivity {
@@ -15,7 +16,7 @@ public class contents extends AppCompatActivity {
         titleText =  (TextView)findViewById(R.id.titleText);
 
         Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
-        titleText.setText(title);
+        ListViewItem content = (ListViewItem)intent.getSerializableExtra("listview");
+        titleText.setText(content.getTitleStr());
     }
 }
